@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Oliveira Da Silva — Portfolio BUT Informatique S4</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ───────────────────────────────────────────── */
+  :root {
+    --bg:        #0a0a0f;
+    --bg2:       #0f0f1a;
+    --bg3:       #13131f;
+    --border:    #1e1e2e;
+    --neon:      #00ff9d;
+    --neon2:     #00cfff;
+    --neon-dim:  #00ff9d22;
+    --text:      #e0e0f0;
+    --muted:     #6b7280;
+    --danger:    #ff4d6d;
+    --warning:   #f59e0b;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+    --radius:    8px;
+    --glow: 0 0 20px #00ff9d44, 0 0 60px #00ff9d11;
+  }
+
+  /* ── RESET ────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  a { color: var(--neon); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; }
+
+  /* ── SCROLLBAR ────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 3px; }
+
+  /* ── NAV ──────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    background: #0a0a0fcc;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--neon);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--neon); text-decoration: none; }
+
+  /* ── SECTIONS ─────────────────────────────────────────── */
+  section {
+    padding: 100px 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--neon);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  p { color: #a0a0b8; margin-bottom: 1rem; }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--neon);
+    border: 1px solid var(--neon);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--neon); }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  /* Terminal animé */
+  .terminal {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .terminal::before {
+    content: '● ● ●';
+    position: absolute;
+    top: 0.6rem; left: 1rem;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.4em;
+  }
+  .terminal-line {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+  .terminal-line:nth-child(2) { animation-delay: 0.5s; }
+  .terminal-line:nth-child(3) { animation-delay: 1.2s; }
+  .terminal-line:nth-child(4) { animation-delay: 1.9s; }
+  .terminal-line:nth-child(5) { animation-delay: 2.6s; }
+  .prompt { color: var(--neon); }
+  .cmd { color: var(--text); }
+  .out { color: var(--neon2); }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    background: var(--neon);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+    animation-delay: 3.2s;
+    opacity: 0;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.7rem 1.6rem;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .btn-primary {
+    background: var(--neon);
+    color: #0a0a0f;
+  }
+  .btn-primary:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: #0a0a0f;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+    text-decoration: none;
+  }
+
+  /* ── DIVIDER ──────────────────────────────────────────── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+
+  /* ── CARDS GRILLE ─────────────────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon), var(--neon2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .card:hover { border-color: #00ff9d44; transform: translateY(-3px); }
+  .card:hover::before { opacity: 1; }
+
+  /* ── PRÉSENTATION ─────────────────────────────────────── */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .about-layout { grid-template-columns: 1fr; } }
+  .about-text p { font-size: 1.05rem; }
+  .about-sidebar .card { margin-bottom: 1rem; }
+  .sidebar-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .qualities { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: var(--neon-dim);
+    color: var(--neon);
+    border: 1px solid #00ff9d33;
+  }
+
+  /* ── COMPÉTENCES / SAE ────────────────────────────────── */
+  .sae-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .sae-number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--neon);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .sae-card h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+  .competences-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 1rem;
+  }
+  .competences-table th {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .competences-table td {
+    padding: 0.75rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    color: #a0a0b8;
+    vertical-align: top;
+  }
+  .competences-table tr:last-child td { border-bottom: none; }
+  .competences-table td:first-child { color: var(--text); font-weight: 500; }
+
+  /* Barre de compétence */
+  .skill-bar-wrap { margin-bottom: 1rem; }
+  .skill-bar-header { display: flex; justify-content: space-between; margin-bottom: 0.3rem; font-size: 0.85rem; }
+  .skill-bar-label { color: var(--text); font-weight: 500; }
+  .skill-bar-pct { font-family: var(--font-mono); color: var(--neon); font-size: 0.78rem; }
+  .skill-bar-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon), var(--neon2));
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: growBar 1s ease forwards;
+  }
+  @keyframes growBar { to { transform: scaleX(1); } }
+
+  /* ── PROJETS UNIVERSITAIRES ───────────────────────────── */
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .project-card:hover { border-color: #00ff9d44; transform: translateY(-3px); }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon), var(--neon2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover::before { opacity: 1; }
+  .project-semester {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--neon);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .project-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0; }
+  .pill {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .pill.tech { color: var(--neon2); border-color: #00cfff33; background: #00cfff11; }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  @media (max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
+  .detail-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  .detail-box-title {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .detail-box ul { list-style: none; }
+  .detail-box ul li {
+    font-size: 0.85rem;
+    color: #a0a0b8;
+    padding: 0.2rem 0;
+    display: flex; align-items: flex-start; gap: 0.4rem;
+  }
+  .detail-box ul li::before { content: '›'; color: var(--neon); flex-shrink: 0; }
+  .improvement-box {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: #f59e0b11;
+    border: 1px solid #f59e0b33;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #d4a017;
+  }
+  .improvement-box strong { color: var(--warning); }
+
+  /* ── STAGE ────────────────────────────────────────────── */
+  .stage-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 768px) { .stage-layout { grid-template-columns: 1fr; } }
+  .stage-info-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+  }
+  .stage-info-card h3 { color: var(--neon); font-size: 1rem; margin-bottom: 1.2rem; font-family: var(--font-mono); letter-spacing: 0.05em; }
+  .info-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: var(--muted); }
+  .info-val { color: var(--text); font-weight: 500; text-align: right; }
+  .stage-mission {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .stage-mission h3 { margin-bottom: 1rem; }
+  .mission-list { list-style: none; }
+  .mission-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: #a0a0b8;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .mission-list li:last-child { border-bottom: none; }
+  .mission-icon { color: var(--neon); flex-shrink: 0; font-style: normal; }
+  .competence-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .competence-block h3 { margin-bottom: 0.5rem; }
+  .competence-block .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: var(--neon-dim);
+    color: var(--neon);
+    border: 1px solid #00ff9d33;
+    margin-bottom: 1rem;
+  }
+  .evidence-box {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: #00ff9d08;
+    border: 1px solid #00ff9d22;
+    border-radius: 6px;
+    font-size: 0.83rem;
+    color: #7addb8;
+    font-family: var(--font-mono);
+  }
+  .evidence-box strong { color: var(--neon); }
+  .critique-box {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: #ff4d6d08;
+    border: 1px solid #ff4d6d22;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #f0909f;
+  }
+  .critique-box strong { color: var(--danger); }
+
+  /* ── OBJECTIFS ────────────────────────────────────────── */
+  .objectifs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 768px) { .objectifs-grid { grid-template-columns: 1fr; } }
+  .obj-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .obj-horizon {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+  }
+  .obj-card:nth-child(1) .obj-horizon { color: var(--neon); }
+  .obj-card:nth-child(2) .obj-horizon { color: var(--neon2); }
+  .obj-card:nth-child(3) .obj-horizon { color: var(--warning); }
+  .obj-card:nth-child(1) { border-top: 2px solid var(--neon); }
+  .obj-card:nth-child(2) { border-top: 2px solid var(--neon2); }
+  .obj-card:nth-child(3) { border-top: 2px solid var(--warning); }
+  .obj-card h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+  .obj-card ul { list-style: none; }
+  .obj-card ul li {
+    font-size: 0.875rem;
+    color: #a0a0b8;
+    padding: 0.3rem 0;
+    display: flex; gap: 0.5rem;
+  }
+  .obj-card ul li::before { content: '→'; color: var(--muted); }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  footer span { color: var(--neon); }
+
+  /* ── SCROLL REVEAL ────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── PROGRESS BAR TOP ─────────────────────────────────── */
+  #progress {
+    position: fixed;
+    top: 60px; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon), var(--neon2));
+    z-index: 99;
+    transition: width 0.1s;
+    box-shadow: 0 0 8px var(--neon);
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">daniel@iut-villetaneuse:~$</div>
+  <ul class="nav-links">
+    <li><a href="#about">Présentation</a></li>
+    <li><a href="#sae">SAE</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#stage">Stage</a></li>
+    <li><a href="#objectifs">Objectifs</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Portfolio · BUT Informatique S4</div>
+    <h1 class="hero-name">
+      Daniel<br><span>Oliveira Da Silva</span>
+    </h1>
+    <p class="hero-subtitle">Étudiant BUT Informatique · Spécialisation Cybersécurité & Réseaux</p>
+
+    <div class="terminal">
+      <div class="terminal-line" style="margin-top:1.8rem">
+        <span class="prompt">~$</span>
+        <span class="cmd">whoami</span>
+      </div>
+      <div class="terminal-line">
+        <span class="out">daniel_oliveira_da_silva</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">~$</span>
+        <span class="cmd">cat skills.txt</span>
+      </div>
+      <div class="terminal-line">
+        <span class="out">Python · Linux · Bash · Réseaux · Cybersécurité</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">~$</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+      <a href="#stage" class="btn btn-ghost">Mon stage</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PRÉSENTATION -->
+<section id="about">
+  <div class="section-label">// 01 — présentation</div>
+  <h2>Qui suis-je ?</h2>
+  <div class="about-layout">
+    <div class="about-text reveal">
+      <p>
+        Je m'appelle <strong style="color:var(--text)">Daniel Oliveira Da Silva</strong>, étudiant en deuxième année de BUT Informatique à l'IUT de Villetaneuse (Sorbonne Paris Nord). 
+        Je me suis orienté vers l'informatique animé par une curiosité naturelle pour la sécurité des systèmes et le fonctionnement profond des réseaux.
+      </p>
+      <p>
+        Mon parcours au BUT m'a permis de construire des bases solides en développement logiciel, en administration système Linux et en scripting Python — des compétences que j'ai pu mettre en pratique lors de mon stage à la Région Île-de-France en tant que développeur Python.
+      </p>
+      <p>
+        Cette expérience professionnelle m'a confirmé mon attrait pour l'automatisation, la sécurité applicative et la fiabilité des infrastructures. Je souhaite approfondir ces domaines dans le cadre de la troisième année du BUT (BUT 3), en alternance ou via un nouveau stage orienté cybersécurité.
+      </p>
+      <p style="margin-bottom:0">
+        Ce portfolio retrace ma trajectoire individuelle à travers les SAÉ du BUT 2, mes projets universitaires en S3 et S4, le bilan de mon stage, et mes objectifs professionnels à court, moyen et long terme.
+      </p>
+    </div>
+    <div class="about-sidebar reveal">
+      <div class="card">
+        <div class="sidebar-label">Formation</div>
+        <div class="sidebar-value">BUT Informatique — S4</div>
+        <div class="sidebar-value" style="color:var(--muted);font-size:0.82rem;margin-top:0.2rem">IUT Villetaneuse · Sorbonne Paris Nord</div>
+      </div>
+      <div class="card">
+        <div class="sidebar-label">Stage BUT 2</div>
+        <div class="sidebar-value">Développeur Python</div>
+        <div class="sidebar-value" style="color:var(--muted);font-size:0.82rem;margin-top:0.2rem">Région Île-de-France</div>
+      </div>
+      <div class="card">
+        <div class="sidebar-label">Spécialisation visée</div>
+        <div class="sidebar-value">Cybersécurité · Réseaux</div>
+      </div>
+      <div class="card">
+        <div class="sidebar-label">Qualités personnelles</div>
+        <div class="qualities">
+          <span class="tag">Rigoureux</span>
+          <span class="tag">Curieux</span>
+          <span class="tag">Autonome</span>
+          <span class="tag">Analytique</span>
+          <span class="tag">Adaptable</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="sidebar-label">Stack technique</div>
+        <div class="qualities">
+          <span class="tag">Python</span>
+          <span class="tag">Bash</span>
+          <span class="tag">Linux</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Git</span>
+          <span class="tag">Réseaux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SAE BUT 2 -->
+<section id="sae">
+  <div class="section-label">// 02 — bilan des compétences</div>
+  <h2>SAÉ & Compétences BUT 2</h2>
+
+  <p class="reveal" style="margin-bottom:2.5rem">
+    Voici une synthèse des Situations d'Apprentissage et d'Évaluation (SAÉ) réalisées au cours du BUT 2. 
+    Pour chaque SAÉ, j'identifie les tâches accomplies, les compétences mobilisées et les preuves qui en attestent la maîtrise.
+  </p>
+
+  <!-- Compétences globales -->
+  <div class="card reveal" style="margin-bottom:2.5rem">
+    <h3 style="margin-bottom:1.5rem">Autoévaluation du degré de maîtrise</h3>
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-header"><span class="skill-bar-label">Scripting Python</span><span class="skill-bar-pct">80%</span></div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-header"><span class="skill-bar-label">Administration Linux / Bash</span><span class="skill-bar-pct">72%</span></div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%;animation-delay:0.15s"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-header"><span class="skill-bar-label">Bases de données SQL</span><span class="skill-bar-pct">65%</span></div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%;animation-delay:0.3s"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-header"><span class="skill-bar-label">Réseaux & protocoles</span><span class="skill-bar-pct">60%</span></div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%;animation-delay:0.45s"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-header"><span class="skill-bar-label">Sécurité applicative</span><span class="skill-bar-pct">50%</span></div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:50%;animation-delay:0.6s"></div></div>
+    </div>
+  </div>
+
+  <!-- SAE 1 -->
+  <div class="sae-card reveal">
+    <div class="sae-number">SAÉ 3.01 — Semestre 3</div>
+    <h3>Développement d'un outil d'automatisation Python</h3>
+    <div class="project-row">
+      <span class="pill tech">Python</span>
+      <span class="pill tech">Bash</span>
+      <span class="pill tech">Linux</span>
+      <span class="pill">Développement</span>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-box">
+        <div class="detail-box-title">Tâches principales</div>
+        <ul>
+          <li>Conception et développement d'un script Python d'automatisation de tâches systèmes</li>
+          <li>Rédaction de la documentation technique</li>
+          <li>Tests unitaires et débogage</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Tâches secondaires</div>
+        <ul>
+          <li>Analyse des besoins fonctionnels</li>
+          <li>Gestion de version avec Git</li>
+          <li>Présentation orale du projet</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Compétences techniques</div>
+        <ul>
+          <li>Programmation orientée objet Python</li>
+          <li>Gestion des erreurs et exceptions</li>
+          <li>Manipulation de fichiers et processus Linux</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Compétences transversales</div>
+        <ul>
+          <li>Gestion de projet en autonomie</li>
+          <li>Communication écrite technique</li>
+          <li>Respect des délais</li>
+        </ul>
+      </div>
+    </div>
+    <div class="evidence-box">
+      <strong>Preuves :</strong> Code source disponible sur dépôt Git · Rapport technique rendu · Note obtenue : mention bien · Retour positif de l'enseignant sur la qualité du code
+    </div>
+    <div class="improvement-box">
+      <strong>Piste d'amélioration (S4) :</strong> Approfondir les tests automatisés (pytest) et intégrer une pipeline CI/CD pour industrialiser les scripts produits.
+    </div>
+  </div>
+
+  <!-- SAE 2 -->
+  <div class="sae-card reveal">
+    <div class="sae-number">SAÉ 3.02 — Semestre 3</div>
+    <h3>Administration d'un système Linux & gestion réseau</h3>
+    <div class="project-row">
+      <span class="pill tech">Linux</span>
+      <span class="pill tech">Bash</span>
+      <span class="pill tech">Réseaux</span>
+      <span class="pill">Administration système</span>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-box">
+        <div class="detail-box-title">Tâches principales</div>
+        <ul>
+          <li>Installation et configuration d'un serveur Linux (Debian)</li>
+          <li>Mise en place de règles pare-feu (iptables)</li>
+          <li>Configuration de services réseau (SSH, DNS, DHCP)</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Tâches secondaires</div>
+        <ul>
+          <li>Rédaction d'un guide d'administration</li>
+          <li>Monitoring des ressources système</li>
+          <li>Sauvegarde et restauration</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Compétences techniques</div>
+        <ul>
+          <li>Administration système Linux avancée</li>
+          <li>Sécurisation d'un serveur</li>
+          <li>Protocoles réseau TCP/IP, DNS, DHCP</li>
+        </ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title">Compétences transversales</div>
+        <ul>
+          <li>Résolution de problèmes complexes</li>
+          <li>Documentation rigoureuse</li>
+          <li>Travail méthodique et structuré</li>
+        </ul>
+      </div>
+    </div>
+    <div class="evidence-box">
+      <strong>Preuves :</strong> VM configurée et démontrée · Documentation remise · Capture d'écran des règles iptables actives · Évaluation pratique validée
+    </div>
+    <div class="improvement-box">
+      <strong>Piste d'amélioration (S4) :</strong> Explorer les solutions de virtualisation avancée (Docker, LXC) et automatiser la configuration via Ansible pour aller vers une approche Infrastructure-as-Code.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJETS UNIVERSITAIRES S3/S4 -->
+<section id="projets">
+  <div class="section-label">// 03 — projets universitaires</div>
+  <h2>Projets S3 & S4</h2>
+
+  <div class="grid-2">
+    <!-- Projet S3 -->
+    <div class="project-card reveal">
+      <div class="project-semester">Projet universitaire n.1 — S3</div>
+      <h3>Outil de surveillance réseau en Python</h3>
+      <div class="project-row">
+        <span class="pill tech">Python</span>
+        <span class="pill tech">Scapy</span>
+        <span class="pill tech">Linux</span>
+        <span class="pill">Sécurité réseau</span>
+      </div>
+      <p style="font-size:0.88rem;margin-top:0.75rem">
+        Développement d'un outil de monitoring passif du trafic réseau local, permettant de détecter des anomalies et de générer des alertes en temps réel. Projet réalisé individuellement en autonomie complète.
+      </p>
+      <div class="detail-grid" style="margin-top:1rem">
+        <div class="detail-box">
+          <div class="detail-box-title">Objectif</div>
+          <ul><li>Surveiller le trafic local et détecter des comportements suspects automatiquement</li></ul>
+        </div>
+        <div class="detail-box">
+          <div class="detail-box-title">Compétences acquises</div>
+          <ul>
+            <li>Analyse de paquets réseau</li>
+            <li>Scripting Python avancé</li>
+            <li>Rapport d'alertes automatique</li>
+          </ul>
+        </div>
+      </div>
+      <div class="improvement-box" style="margin-top:1rem">
+        <strong>Amélioration prévue S4 :</strong> Intégrer une interface web de visualisation des alertes et persister les données en base SQL.
+      </div>
+    </div>
+
+    <!-- Projet S4 -->
+    <div class="project-card reveal">
+      <div class="project-semester">Projet universitaire n.2 — S4</div>
+      <h3>Tableau de bord de sécurité système</h3>
+      <div class="project-row">
+        <span class="pill tech">Python</span>
+        <span class="pill tech">SQL</span>
+        <span class="pill tech">Bash</span>
+        <span class="pill tech">HTML/CSS</span>
+        <span class="pill">Cybersécurité</span>
+      </div>
+      <p style="font-size:0.88rem;margin-top:0.75rem">
+        Conception d'un dashboard web léger qui agrège des métriques de sécurité système (logs, tentatives d'accès, état des services) en interrogeant une base de données SQLite alimentée par des scripts Bash/Python automatisés.
+      </p>
+      <div class="detail-grid" style="margin-top:1rem">
+        <div class="detail-box">
+          <div class="detail-box-title">Objectif</div>
+          <ul><li>Centraliser la supervision de la sécurité d'un système Linux</li></ul>
+        </div>
+        <div class="detail-box">
+          <div class="detail-box-title">Compétences acquises</div>
+          <ul>
+            <li>Intégration Python ↔ SQL</li>
+            <li>Visualisation de données</li>
+            <li>Sécurité défensive</li>
+          </ul>
+        </div>
+      </div>
+      <div class="improvement-box" style="margin-top:1rem">
+        <strong>Piste BUT 3 :</strong> Étendre la solution vers une architecture SIEM légère et intégrer des règles de détection d'intrusion.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BILAN STAGE -->
+<section id="stage">
+  <div class="section-label">// 04 — bilan du stage BUT 2</div>
+  <h2>Stage · Région Île-de-France</h2>
+
+  <div class="stage-layout reveal">
+    <div class="stage-info-card">
+      <h3>// Informations</h3>
+      <div class="info-row"><span class="info-key">Entreprise</span><span class="info-val">Région Île-de-France</span></div>
+      <div class="info-row"><span class="info-key">Poste</span><span class="info-val">Développeur Python</span></div>
+      <div class="info-row"><span class="info-key">Lieu</span><span class="info-val">Île-de-France</span></div>
+      <div class="info-row"><span class="info-key">Secteur</span><span class="info-val">Service public / DSI</span></div>
+      <div class="info-row"><span class="info-key">Durée</span><span class="info-val">BUT 2 (10 semaines)</span></div>
+    </div>
+    <div class="stage-mission">
+      <h3>Missions réalisées</h3>
+      <ul class="mission-list">
+        <li><i class="mission-icon">⬡</i>Développement de scripts Python d'automatisation de tâches administratives internes</li>
+        <li><i class="mission-icon">⬡</i>Manipulation et traitement de données via SQL et pandas</li>
+        <li><i class="mission-icon">⬡</i>Participation aux réunions d'équipe et aux revues de code</li>
+        <li><i class="mission-icon">⬡</i>Rédaction de documentation technique et fonctionnelle</li>
+        <li><i class="mission-icon">⬡</i>Tests et validation des scripts sur environnement Linux</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Découverte du monde pro -->
+  <div class="card reveal" style="margin-bottom:1.5rem;padding:1.75rem">
+    <h3 style="margin-bottom:0.75rem">Découverte du monde professionnel</h3>
+    <p>
+      Ce stage m'a permis de découvrir le fonctionnement d'une Direction des Systèmes d'Information (DSI) au sein d'une grande institution publique. J'ai été frappé par l'importance de la <strong style="color:var(--text)">vulgarisation</strong> : savoir expliquer une solution technique à des interlocuteurs non techniques est une compétence centrale, que j'avais sous-estimée.
+    </p>
+    <p style="margin-bottom:0">
+      J'ai également découvert la rigueur imposée par les <strong style="color:var(--text)">contraintes de sécurité du secteur public</strong> (habilitations, traçabilité des accès, respect des référentiels ANSSI), ce qui a renforcé mon intérêt pour la cybersécurité institutionnelle.
+    </p>
+  </div>
+
+  <!-- Compétence 1 -->
+  <div class="competence-block reveal">
+    <h3>Compétence 1 — Réaliser un développement logiciel</h3>
+    <span class="badge">BUT Informatique · C1</span>
+    <p>
+      Au cours du stage, j'ai développé plusieurs scripts Python destinés à automatiser des traitements de données internes (rapports, extractions, contrôles qualité). J'ai mobilisé mes connaissances en programmation orientée objet, gestion de fichiers CSV/Excel et connexion à des bases de données.
+    </p>
+    <p>
+      J'ai appris à travailler dans un environnement de production réel, avec des contraintes de qualité strictes : code commenté, tests de non-régression, versioning Git avec branches et pull requests.
+    </p>
+    <div class="evidence-box">
+      <strong>Preuves :</strong> Dépôt Git interne · Code relu et validé par un développeur senior · Scripts déployés en production · Rapport de stage pp. 12-18
+    </div>
+    <div class="critique-box">
+      <strong>Angle critique :</strong> Mon code manquait parfois de lisibilité pour l'équipe (nommage peu explicite, absence de type hints). J'ai pris conscience que la maintenabilité est aussi importante que la fonctionnalité.
+    </div>
+  </div>
+
+  <!-- Compétence 2 -->
+  <div class="competence-block reveal">
+    <h3>Compétence 2 — Administrer des systèmes informatiques communicants</h3>
+    <span class="badge">BUT Informatique · C3</span>
+    <p>
+      J'ai travaillé sur un environnement Linux (Ubuntu Server) pour déployer et exécuter mes scripts. J'ai configuré des cron jobs, géré des droits fichiers et diagnostiqué des problèmes de permissions — des compétences directement issues des SAÉ du BUT.
+    </p>
+    <p>
+      Cette expérience m'a permis de consolider ma compréhension des interactions entre un script Python et le système d'exploitation sous-jacent, notamment en matière de sécurité des processus.
+    </p>
+    <div class="evidence-box">
+      <strong>Preuves :</strong> Capture des cron jobs configurés · Journal des incidents résolus · Évaluation du tuteur mentionnant l'autonomie sur Linux
+    </div>
+    <div class="critique-box">
+      <strong>Angle critique :</strong> Je n'ai pas eu l'occasion d'intervenir sur la configuration réseau ou la sécurité périmétrique de l'infrastructure — un manque que je compte combler en BUT 3 via un stage ou une alternance orientée sécurité des SI.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OBJECTIFS -->
+<section id="objectifs">
+  <div class="section-label">// 05 — objectifs</div>
+  <h2>Mes objectifs</h2>
+
+  <div class="objectifs-grid">
+    <!-- Court terme -->
+    <div class="obj-card reveal">
+      <div class="obj-horizon">Court terme · Stage BUT 3</div>
+      <h3>Obtenir une alternance en cybersécurité</h3>
+      <ul>
+        <li>Cibler des entreprises avec une équipe SOC ou pentest</li>
+        <li>Mettre à jour mon portfolio et mon CV dès juin</li>
+        <li>Passer la certification Linux (LPIC-1)</li>
+        <li>Participer à des CTF pour renforcer mes compétences offensives</li>
+      </ul>
+    </div>
+    <!-- Moyen terme -->
+    <div class="obj-card reveal">
+      <div class="obj-horizon">Moyen terme · Post-BUT</div>
+      <h3>Formation spécialisée en sécurité des SI</h3>
+      <ul>
+        <li>Intégrer un Master cybersécurité (ESIEA, Paris-Saclay…)</li>
+        <li>Obtenir un premier emploi en sécurité défensive (SOC analyst)</li>
+        <li>Obtenir la certification CompTIA Security+</li>
+        <li>Développer un réseau professionnel via LinkedIn & conférences</li>
+      </ul>
+    </div>
+    <!-- Long terme -->
+    <div class="obj-card reveal">
+      <div class="obj-horizon">Long terme · 10-15 ans</div>
+      <h3>Architecte sécurité ou expert RSSI</h3>
+      <ul>
+        <li>Évoluer vers un poste d'architecte sécurité ou RSSI</li>
+        <li>Contribuer à la sécurisation des SI publics</li>
+        <li>Partager mes connaissances (mentorat, open source)</li>
+        <li>Obtenir des certifications avancées (CISSP, OSCP)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Conclusion évolution BUT1 → BUT2 -->
+  <div class="card reveal" style="padding:2rem">
+    <h3 style="margin-bottom:1rem">Évolution BUT 1 → BUT 2 : points forts & acquis</h3>
+    <div class="grid-2">
+      <div>
+        <div class="sidebar-label" style="margin-bottom:0.75rem">Ce que j'ai consolidé</div>
+        <ul style="list-style:none">
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--neon)">✓</span> Maîtrise de Python comme outil professionnel</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--neon)">✓</span> Aisance sur les environnements Linux</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--neon)">✓</span> Capacité à produire du code maintenable</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--neon)">✓</span> Travail en équipe et communication technique</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sidebar-label" style="margin-bottom:0.75rem">Ce que je veux développer en BUT 3</div>
+        <ul style="list-style:none">
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--warning)">→</span> Sécurité offensive (pentest, CTF)</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--warning)">→</span> Architecture réseau et sécurité périmétrique</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--warning)">→</span> Outils SIEM et détection d'intrusion</li>
+          <li style="padding:0.35rem 0;font-size:0.88rem;color:#a0a0b8;display:flex;gap:0.5rem"><span style="color:var(--warning)">→</span> Certifications professionnelles reconnues</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Portfolio réalisé dans le cadre du <span>BUT Informatique S4</span> · IUT Villetaneuse · Sorbonne Paris Nord</p>
+  <p style="margin-top:0.3rem">Daniel Oliveira Da Silva · <span>2025–2026</span></p>
+</footer>
+
+<script>
+  // ── PROGRESS BAR ──────────────────────────────────────
+  const progressBar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+  });
+
+  // ── SCROLL REVEAL ──────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── NAV ACTIVE ─────────────────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--neon)' : '';
+    });
+  });
+</script>
+</body>
+</html>
